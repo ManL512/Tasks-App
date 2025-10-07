@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-// -------------------- DATA MOCK (estático, sin lógica) --------------------
+// -------------------- DATA CLASS (estático, sin lógica) --------------------
 
 private val daysMock = listOf(
     DayUi(5, "Mon", selected = true),
