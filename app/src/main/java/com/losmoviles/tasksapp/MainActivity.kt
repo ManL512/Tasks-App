@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.losmoviles.tasksapp.feature.createtask.CreateTaskUiOnly
+import com.losmoviles.tasksapp.feature.createtask.CreateTaskTopBarUi
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 // -------------------- DATA CLASS (estático, sin lógica) --------------------
 
-private val daysMock = listOf(
+val daysMock = listOf(
     DayUi(5, "Mon", selected = true),
     DayUi(6, "Tue"),
     DayUi(7, "Wed"),
@@ -52,7 +54,7 @@ private val daysMock = listOf(
     DayUi(11, "Sun"),
 )
 
-private val activitiesMock = listOf(
+val activitiesMock = listOf(
     ActivityUi("Idea",  "13 on this week", Icons.Outlined.Lightbulb),
     ActivityUi("Food",  "8 on this week",  Icons.Outlined.Fastfood),
     ActivityUi("Work",  "15 on this week", Icons.Outlined.Work),
@@ -60,90 +62,25 @@ private val activitiesMock = listOf(
     ActivityUi("Music", "24 on this week", Icons.Outlined.MusicNote),
 )
 
-private data class DayUi(
+data class DayUi(
     val number: Int,
     val short: String,
     val selected: Boolean = false
 )
-private data class ActivityUi(
+data class ActivityUi(
     val title: String,
     val subtitle: String,
     val icon: androidx.compose.ui.graphics.vector.ImageVector
 )
 
-// -------------------- SCREEN --------------------
-
-@Composable
-fun CreateTaskUiOnly() {
-    Scaffold(
-        topBar = { CreateTaskTopBarUi() },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /* no funciona, por ahora */ }) {
-                Text("+")
-            }
-        }
-    ) { inner ->
-        Column(
-            modifier = Modifier
-                .padding(inner)
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-        ) {
-            // Selector de días (horizontal)
-            LazyRow(
-                modifier = Modifier.padding(top = 16.dp, bottom = 12.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                items(daysMock.size) { index ->
-                    DayChipUi(day = daysMock[index])
-                }
-            }
-
-            // Título de la sección
-            Text(
-                text = "Chose activity",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(vertical = 8.dp)
-            )
-
-            // Lista de actividades (vertical)
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                contentPadding = PaddingValues(bottom = 96.dp)
-            ) {
-                items(activitiesMock.size) { index ->
-                    ActivityCardUi(activity = activitiesMock[index])
-                }
-            }
-        }
-    }
-}
-
 // -------------------- TOP BAR --------------------
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun CreateTaskTopBarUi() {
-    TopAppBar(
-        title = {
-            Row(
-                Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Icon(Icons.Filled.Menu, contentDescription = "Menu")
-                Text("Create Task", style = MaterialTheme.typography.titleMedium)
-                Icon(Icons.Filled.Settings, contentDescription = "Settings")
-            }
-        }
-    )
-}
+
 
 // -------------------- DAY CHIP (estático) --------------------
 
 @Composable
-private fun DayChipUi(day: DayUi) {
+fun DayChipUi(day: DayUi) {
     val bg = if (day.selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface
     val fg = if (day.selected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant
     Surface(
@@ -164,7 +101,7 @@ private fun DayChipUi(day: DayUi) {
 // -------------------- ACTIVITY CARD (estático) --------------------
 
 @Composable
-private fun ActivityCardUi(activity: ActivityUi) {
+fun ActivityCardUi(activity: ActivityUi) {
     Surface(
         shape = RoundedCornerShape(16.dp),
         tonalElevation = 2.dp,
