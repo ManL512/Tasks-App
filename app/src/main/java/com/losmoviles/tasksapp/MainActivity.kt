@@ -38,10 +38,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MaterialTheme {
-                CreateTaskUiOnly() // <- solo UI, sin funcionalidades
+            TasksAppTheme {
+                MyApp()
             }
         }
+           
     }
 }
 
