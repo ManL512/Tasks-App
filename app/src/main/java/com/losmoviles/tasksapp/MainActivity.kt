@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MaterialTheme {
-                CreateTaskUiOnly() // <- solo UI, sin funcionalidades
+                MyApp() // <- solo UI, sin funcionalidades
             }
         }
     }
