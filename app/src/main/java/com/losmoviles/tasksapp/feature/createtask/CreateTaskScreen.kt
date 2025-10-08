@@ -16,8 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-import com.losmoviles.tasksapp.activitiesMock
-import com.losmoviles.tasksapp.daysMock
+import com.losmoviles.tasksapp.model.activitiesMock
+import com.losmoviles.tasksapp.model.daysMock
 
 @Composable
 fun CreateTaskUiOnly() {
