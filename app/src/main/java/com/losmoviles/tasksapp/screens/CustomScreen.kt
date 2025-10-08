@@ -1,5 +1,6 @@
 package com.losmoviles.tasksapp.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,24 +15,39 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.losmoviles.tasksapp.services.NavigationService
 
 @OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
-fun CustomScreen(title: String, content:  @Composable () -> Unit, onTap:  (() -> Unit)? = null){
+fun CustomScreen(
+    title: String,
+    content: @Composable () -> Unit,
+    onTap: (() -> Unit)? = null,
+    backgroundColor: Color = Color(0xFFA3485A)
+) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title ={ Text(text = title) }, navigationIcon = {
-                    if(onTap !=null){
-                        TextButton(onClick = onTap) {Text("Atras") }
+                title = { Text(text = title) },
+                navigationIcon = {
+                    if (onTap != null) {
+                        TextButton(onClick = onTap) {
+                            Text("Atrás")
+                        }
                     }
                 }
             )
         }
-    )
-    {paddingValues ->
-        Box (modifier = Modifier.padding(paddingValues)) {content()}
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor)
+                .padding(paddingValues)
+        ) {
+            content()
+        }
     }
 }

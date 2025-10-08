@@ -46,7 +46,7 @@ fun ContentHomeScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Home",
+        Text(text = "UI Components",
             color = Color(0xFFF5DAA7)
         )
 
@@ -56,15 +56,15 @@ fun ContentHomeScreen(navController: NavController) {
                 .width(100.dp),
             colors = ButtonDefaults.buttonColors(
                 contentColor = Color(0xFF662222),
-                containerColor = Color(0xFFF5DAA7) // el primer par (FF) es la opacidad (alpha)
+                containerColor = Color(0xFFF5DAA7)
             ),
             onClick = {
-                val title = "Mis tareas de hoy"
+                val title = "Textos de Compose"
                 val safe = Uri.encode(title)
                 navController.navigate("detail-screen/$safe")
             }
         ) {
-            Text("Idea")
+            Text("Textos")
         }
 
         Button(
@@ -76,12 +76,12 @@ fun ContentHomeScreen(navController: NavController) {
                 containerColor = Color(0xFFF5DAA7) // el primer par (FF) es la opacidad (alpha)
             ),
             onClick = {
-                val title = "Mis tareas de hoy"
+                val title = "Botones de Compose"
                 val safe = Uri.encode(title)
                 navController.navigate("detail-screen/$safe")
             }
         ) {
-            Text("Idea")
+            Text("Botones")
         }
 
         Button(
@@ -93,12 +93,12 @@ fun ContentHomeScreen(navController: NavController) {
                 containerColor = Color(0xFFF5DAA7) // el primer par (FF) es la opacidad (alpha)
             ),
             onClick = {
-                val title = "Mis tareas de hoy"
+                val title = "Switch en Compose"
                 val safe = Uri.encode(title)
                 navController.navigate("detail-screen/$safe")
             }
         ) {
-            Text("Idea")
+            Text("Switch")
         }
     }
 }
