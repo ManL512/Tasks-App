@@ -15,8 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.losmoviles.tasksapp.ActivityCardUi
-import com.losmoviles.tasksapp.DayChipUi
+
 import com.losmoviles.tasksapp.activitiesMock
 import com.losmoviles.tasksapp.daysMock
 
