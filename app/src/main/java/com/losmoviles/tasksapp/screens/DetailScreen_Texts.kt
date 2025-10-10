@@ -2,10 +2,7 @@ package com.losmoviles.tasksapp.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +13,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import CustomScreen
 
 @Composable
-fun DetailScreen(title: String, navController: NavController){
+fun TextsDetailScreen(title: String, navController: NavController){
     CustomScreen(
         title = title,
-        content = { ContentDetailScreen()},
+        content = { TextsContentDetailScreen() },
         onTap = {
             navController.popBackStack()
         }
@@ -29,7 +27,7 @@ fun DetailScreen(title: String, navController: NavController){
 }
 
 @Composable
-fun ContentDetailScreen(){
+fun TextsContentDetailScreen(){
     Column(
         modifier = Modifier
             .fillMaxSize()

@@ -1,16 +1,13 @@
 package com.losmoviles.tasksapp.services
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import ButtonsDetailScreen
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.losmoviles.tasksapp.screens.DetailScreen
+import com.losmoviles.tasksapp.screens.TextsDetailScreen
 import com.losmoviles.tasksapp.screens.HomeScreen
 
 @Composable
@@ -28,7 +25,16 @@ fun NavigationService(navController: NavHostController){
             }
         )) {backStackEntry ->
             val title = backStackEntry.arguments?.getString("title") ?: "Desconocido"
-            DetailScreen( title= title, navController=navController )
+            TextsDetailScreen( title= title, navController=navController )
+        }
+
+        composable(route="detail-screen-button/{title}", arguments = listOf(
+            navArgument(name="title"){
+                type = NavType.StringType
+            }
+        )) {backStackEntry ->
+            val title = backStackEntry.arguments?.getString("title") ?: "Desconocido"
+            ButtonsDetailScreen( title= title, navController=navController )
         }
     }
 }

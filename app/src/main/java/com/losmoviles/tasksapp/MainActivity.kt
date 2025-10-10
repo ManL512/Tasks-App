@@ -28,9 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.losmoviles.tasksapp.feature.createtask.CreateTaskUiOnly
-import com.losmoviles.tasksapp.feature.createtask.CreateTaskTopBarUi
-import com.losmoviles.tasksapp.feature.createtask.DayChipUi
 import com.losmoviles.tasksapp.feature.createtask.ActivityCardUi
 
 class MainActivity : ComponentActivity() {
@@ -39,18 +36,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MaterialTheme {
-                MyApp() // <- solo UI, sin funcionalidades
+                MyApp()
             }
         }
-    }
-}
-
-// -------------------- PREVIEW --------------------
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewCreateTaskUiOnly() {
-    MaterialTheme {
-        CreateTaskUiOnly()
     }
 }

@@ -4,21 +4,20 @@ import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.losmoviles.tasksapp.feature.createtask.ActivityCardUi
+import com.losmoviles.tasksapp.model.activitiesMock
+import CustomScreen
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -29,6 +28,7 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color(0xFFA3485A))
+                    .padding(top = 20.dp)
             ) {
                 ContentHomeScreen(navController)
             }
@@ -39,66 +39,34 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun ContentHomeScreen(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+//    Spacer(modifier = Modifier.height(200.dp))
+    // Lista vertical
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(bottom = 96.dp)
     ) {
-        Text(text = "UI Components",
-            color = Color(0xFFF5DAA7)
-        )
-
-        Button(
-            shape = RoundedCornerShape(16.dp),
-            modifier = Modifier
-                .width(100.dp),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color(0xFF662222),
-                containerColor = Color(0xFFF5DAA7)
-            ),
-            onClick = {
-                val title = "Textos de Compose"
-                val safe = Uri.encode(title)
-                navController.navigate("detail-screen/$safe")
+        items(activitiesMock.size) { index ->
+            val item = activitiesMock[index]
+            ActivityCardUi(activity = item) {
+                // Decide qué hacer con el click.
+                when (item.title) {
+                    "Texts" -> {
+                        val title = "Textos de Compose"
+                        val safe = Uri.encode(title)
+                        navController.navigate("detail-screen/$safe")
+                    }
+                    "Buttons" -> {
+                        val title = "Botones de Compose"
+                        val safe = Uri.encode(title)
+                        navController.navigate("detail-screen-button/$safe")
+                    }
+                    "Switch" -> {
+                        val title = "Cards de Compose"
+                        val safe = Uri.encode(title)
+                        navController.navigate("detail-screen/$safe")
+                    }
+                }
             }
-        ) {
-            Text("Textos")
-        }
-
-        Button(
-            shape = RoundedCornerShape(16.dp),
-            modifier = Modifier
-                .width(100.dp),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color(0xFF662222),
-                containerColor = Color(0xFFF5DAA7) // el primer par (FF) es la opacidad (alpha)
-            ),
-            onClick = {
-                val title = "Botones de Compose"
-                val safe = Uri.encode(title)
-                navController.navigate("detail-screen/$safe")
-            }
-        ) {
-            Text("Botones")
-        }
-
-        Button(
-            shape = RoundedCornerShape(16.dp),
-            modifier = Modifier
-                .width(100.dp),
-            colors = ButtonDefaults.buttonColors(
-                contentColor = Color(0xFF662222),
-                containerColor = Color(0xFFF5DAA7) // el primer par (FF) es la opacidad (alpha)
-            ),
-            onClick = {
-                val title = "Switch en Compose"
-                val safe = Uri.encode(title)
-                navController.navigate("detail-screen/$safe")
-            }
-        ) {
-            Text("Switch")
         }
     }
 }

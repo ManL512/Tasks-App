@@ -1,6 +1,8 @@
 package com.losmoviles.tasksapp.feature.createtask
 
+import android.R.attr.padding
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Gesture
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,14 +28,18 @@ import androidx.compose.ui.unit.dp
 import com.losmoviles.tasksapp.model.ActivityUi
 
 @Composable
-fun ActivityCardUi(activity: ActivityUi) {
+fun ActivityCardUi(activity: ActivityUi,  onClick: () -> Unit) {
     Surface(
         shape = RoundedCornerShape(16.dp),
         tonalElevation = 2.dp,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable(onClick = onClick)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Icono dentro de un contenedor redondo suave
@@ -51,7 +58,7 @@ fun ActivityCardUi(activity: ActivityUi) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(activity.title, style = MaterialTheme.typography.titleMedium)
                 Text(
-                    activity.subtitle,
+                    activity.route,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
