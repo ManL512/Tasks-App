@@ -61,9 +61,9 @@ fun ContentHomeScreen(navController: NavController) {
                         navController.navigate("detail-screen-button/$safe")
                     }
                     "Switch" -> {
-                        val title = "Cards de Compose"
+                        val title = "Switch de Compose"
                         val safe = Uri.encode(title)
-                        navController.navigate("detail-screen/$safe")
+                        navController.navigate("detail-screen-switch/$safe")
                     }
                 }
             }

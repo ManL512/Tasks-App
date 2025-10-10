@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.losmoviles.tasksapp.screens.TextsDetailScreen
 import com.losmoviles.tasksapp.screens.HomeScreen
+import com.losmoviles.tasksapp.screens.SwitchContentDetailScreen
 
 @Composable
 fun NavigationService(navController: NavHostController){
@@ -35,6 +36,15 @@ fun NavigationService(navController: NavHostController){
         )) {backStackEntry ->
             val title = backStackEntry.arguments?.getString("title") ?: "Desconocido"
             ButtonsDetailScreen( title= title, navController=navController )
+        }
+
+        composable(route="detail-screen-switch/{title}", arguments = listOf(
+            navArgument(name="title"){
+                type = NavType.StringType
+            }
+        )) {backStackEntry ->
+            val title = backStackEntry.arguments?.getString("title") ?: "Desconocido"
+            SwitchContentDetailScreen( title= title, navController=navController )
         }
     }
 }
