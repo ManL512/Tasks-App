@@ -39,7 +39,7 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun ContentHomeScreen(navController: NavController) {
-//    Spacer(modifier = Modifier.height(200.dp))
+
     // Lista vertical
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(12.dp),

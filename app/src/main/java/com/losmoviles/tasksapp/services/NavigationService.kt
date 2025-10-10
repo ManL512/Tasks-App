@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.losmoviles.tasksapp.screens.TextsDetailScreen
 import com.losmoviles.tasksapp.screens.HomeScreen
-import com.losmoviles.tasksapp.screens.SwitchContentDetailScreen
+import com.losmoviles.tasksapp.screens.SwitchDetailScreen
 
 @Composable
 fun NavigationService(navController: NavHostController){
@@ -44,7 +44,7 @@ fun NavigationService(navController: NavHostController){
             }
         )) {backStackEntry ->
             val title = backStackEntry.arguments?.getString("title") ?: "Desconocido"
-            SwitchContentDetailScreen( title= title, navController=navController )
+            SwitchDetailScreen( title= title, navController=navController )
         }
     }
 }

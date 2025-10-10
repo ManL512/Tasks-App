@@ -1,10 +1,14 @@
 package com.losmoviles.tasksapp.screens
 
+import CustomScreen
+import android.widget.Switch
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,10 +23,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
 @Composable
-fun SwitchContentDetailScreen(title: String, navController: NavHostController) {
+fun SwitchDetailScreen(
+    navController: NavHostController,
+    title: String = "Ejemplos de Switch"
+) {
+    CustomScreen(
+        title = title,
+        onTap = { navController.popBackStack() },
+        backgroundColor = Color(0xFFB4DEBD),
+        content = {                    // <-- NÓMBRALO
+            SwitchDetailBody()
+        }
+    )
+}
+
+@Composable
+private fun SwitchDetailBody() {
     val context = LocalContext.current
 
-    // Estados de cada switch
     var switchBasic by remember { mutableStateOf(false) }
     var switchColored by remember { mutableStateOf(false) }
     var switchWithLabel by remember { mutableStateOf(false) }
@@ -33,40 +51,39 @@ fun SwitchContentDetailScreen(title: String, navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+        verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.Top),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        // --- 1. Switch básico ---
-        androidx.compose.material3.Switch(
+        // 1) Básico
+        Switch(
             checked = switchBasic,
             onCheckedChange = {
                 switchBasic = it
                 Toast.makeText(context, "Switch básico: $it", Toast.LENGTH_SHORT).show()
             }
         )
-        Text(text = "Switch básico: ${if (switchBasic) "Activado" else "Desactivado"}")
+        Text("Switch básico: ${if (switchBasic) "Activado" else "Desactivado"}")
 
-        // --- 2. Switch con colores personalizados ---
-        androidx.compose.material3.Switch(
+        // 2) Colores personalizados
+        Switch(
             checked = switchColored,
             onCheckedChange = {
                 switchColored = it
                 Toast.makeText(context, "Switch color: $it", Toast.LENGTH_SHORT).show()
             },
-            colors = androidx.compose.material3.SwitchDefaults.colors(
+            colors = SwitchDefaults.colors(
                 checkedThumbColor = Color(0xFF4CAF50),
                 checkedTrackColor = Color(0xFF81C784),
                 uncheckedThumbColor = Color(0xFFBDBDBD),
                 uncheckedTrackColor = Color(0xFFE0E0E0)
             )
         )
-        Text(text = "Switch con color personalizado")
+        Text("Switch con color personalizado")
 
-        // --- 3. Switch con texto descriptivo ---
+        // 3) Con texto descriptivo
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Notificaciones Push")
-            androidx.compose.material3.Switch(
+            Text("Notificaciones Push")
+            Switch(
                 checked = switchWithLabel,
                 onCheckedChange = {
                     switchWithLabel = it
@@ -75,22 +92,19 @@ fun SwitchContentDetailScreen(title: String, navController: NavHostController) {
             )
         }
 
-        // --- 4. Switch deshabilitado ---
-        androidx.compose.material3.Switch(
+        // 4) Deshabilitado
+        Switch(
             checked = switchDisabled,
             onCheckedChange = {},
             enabled = false
         )
-        Text(text = "Switch deshabilitado (sin interacción)")
+        Text("Switch deshabilitado (sin interacción)")
 
-        // --- 5. Switch con texto dinámico ---
-        androidx.compose.material3.Switch(
+        // 5) Texto dinámico
+        Switch(
             checked = switchDynamicText,
             onCheckedChange = { switchDynamicText = it }
         )
-        Text(
-            text = if (switchDynamicText) "Modo oscuro activado 🌙"
-            else "Modo claro ☀️"
-        )
+        Text(if (switchDynamicText) "Modo oscuro activado 🌙" else "Modo claro ☀️")
     }
 }
