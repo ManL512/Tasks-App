@@ -56,7 +56,7 @@ fun ActivityCardUi(activity: ActivityUi,  onClick: () -> Unit) {
             Spacer(Modifier.width(12.dp))
 
             Column(modifier = Modifier.weight(1f)) {
-                Text(activity.title, style = MaterialTheme.typography.titleMedium)
+                Text(activity.route, style = MaterialTheme.typography.titleMedium)
                 Text(
                     activity.route,
                     style = MaterialTheme.typography.bodySmall,

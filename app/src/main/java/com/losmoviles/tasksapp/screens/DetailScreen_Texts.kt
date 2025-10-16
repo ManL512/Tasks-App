@@ -13,8 +13,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import CustomScreen
-
 @Composable
 fun TextsDetailScreen(title: String, navController: NavController){
     CustomScreen(

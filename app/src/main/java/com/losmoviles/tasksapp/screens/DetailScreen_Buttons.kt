@@ -11,7 +11,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import CustomScreen
 import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -33,10 +32,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import com.losmoviles.tasksapp.screens.CustomScreen
 import java.time.LocalDateTime
+
 
 @Composable
 fun ButtonsDetailScreen(title: String, navController: NavController){
+    val background by remember {mutableStateOf(Color(0xFFB4DEBD))  }
+
     CustomScreen(
         title = title,
         content = { ButtonsContentDetailScreen()},
@@ -138,41 +141,3 @@ fun ButtonsContentDetailScreen() {
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-
-@Composable
-fun CustomScreen(
-    title: String,
-    content: @Composable () -> Unit,
-    onTap: (() -> Unit)? = null,
-    backgroundColor: Color = Color(0xFFA3485A) // Se puede cambiar por cada custom screen
-) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = title) },
-                navigationIcon = {
-                    if (onTap != null) {
-                        IconButton(
-                            onClick = onTap
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ArrowBackIosNew,
-                                contentDescription = "Back"
-                            )
-                        }
-                    }
-                }
-            )
-        }
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(backgroundColor)
-                .padding(paddingValues)
-        ) {
-            content()
-        }
-    }
-}

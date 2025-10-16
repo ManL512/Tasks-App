@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.losmoviles.tasksapp.feature.createtask.ActivityCardUi
 import com.losmoviles.tasksapp.model.activitiesMock
-import CustomScreen
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -49,7 +48,7 @@ fun ContentHomeScreen(navController: NavController) {
             val item = activitiesMock[index]
             ActivityCardUi(activity = item) {
                 // Decide qué hacer con el click.
-                when (item.title) {
+                when (item.route) {
                     "Texts" -> {
                         val title = "Textos de Compose"
                         val safe = Uri.encode(title)
