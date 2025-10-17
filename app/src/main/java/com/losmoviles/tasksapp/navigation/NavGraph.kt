@@ -1,52 +1,54 @@
-package com.losmoviles.tasksapp.services
-import ButtonsDetailScreen
+package com.losmoviles.tasksapp.navigation
+
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.losmoviles.tasksapp.screens.*
-import com.losmoviles.tasksapp.model.*
+import com.losmoviles.tasksapp.screens.ButtonsDetailScreen
+import com.losmoviles.tasksapp.screens.TextsDetailScreen
+import com.losmoviles.tasksapp.screens.SwitchDetailScreen
+import com.losmoviles.tasksapp.screens.HomeScreen
+
 
 @Composable
-fun NavigationService(navController: NavHostController) {
+fun NavGraph(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     NavHost(
         navController = navController,
-        startDestination = "home-screen"
+        startDestination = Graph.Home,
+        modifier = modifier
     ) {
-        composable("home-screen") {
+        composable(Graph.Home) {
             HomeScreen(navController)
         }
 
-        // Bind each Feature to its destination pattern
         composable(
-            route = Feature.Texts.pattern(),
+            route = "detail-text/{title}",
             arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
         ) { backStack ->
-            val title = backStack.arguments?.getString(TITLE_ARG) ?: Feature.Texts.defaultTitle
-            TextsDetailScreen(title = title, navController = navController)
+            val title = backStack.arguments?.getString(TITLE_ARG) ?: Route.texts.defaultTitle
+            TextsDetailScreen(title = title)
         }
 
-        composable(
-            route = Feature.Buttons.pattern(),
-            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
-        ) { backStack ->
-            val title = backStack.arguments?.getString(TITLE_ARG) ?: Feature.Buttons.defaultTitle
-            ButtonsDetailScreen(title = title, navController = navController)
-        }
-
-        composable(
-            route = Feature.Switch.pattern(),
-            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
-        ) { backStack ->
-            val title = backStack.arguments?.getString(TITLE_ARG) ?: Feature.Switch.defaultTitle
-            SwitchDetailScreen(title = title, navController = navController)
-        }
-
-        // Optional: wire the rest when you have screens
-        // composable(Feature.Radio.pattern(),   ...) { /* RadioDetailScreen */ }
-        // composable(Feature.CheckBox.pattern(),...) { /* CheckBoxDetailScreen */ }
-        // composable(Feature.Fab.pattern(),     ...) { /* FabDetailScreen */ }
+//        composable(
+//            route = Destination.Buttons.pattern(),
+//            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
+//        ) { backStack ->
+//            val title = backStack.arguments?.getString(TITLE_ARG) ?: Destination.Buttons.defaultTitle
+//            ButtonsDetailScreen(title = title)
+//        }
+//
+//        composable(
+//            route = Destination.Switch.pattern(),
+//            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
+//        ) { backStack ->
+//            val title = backStack.arguments?.getString(TITLE_ARG) ?: Destination.Switch.defaultTitle
+//            SwitchDetailScreen(title = title)
+//        }
     }
 }

@@ -1,71 +1,58 @@
 package com.losmoviles.tasksapp.screens
 
-import android.net.Uri
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.losmoviles.tasksapp.feature.createtask.ActivityCardUi
-import com.losmoviles.tasksapp.model.activitiesMock
+import com.losmoviles.tasksapp.ui.components.ActivityCard
+import com.losmoviles.tasksapp.model.Feature
+import com.losmoviles.tasksapp.model.features
+
+
+private val HomeTopPadding = 20.dp
+private val ListItemSpacing = 12.dp
+private val ListBottomPadding = 96.dp
+private val HomeBackground = Color(0xFFA3485A)
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    CustomScreen(
-        title = "Inicio",
-        content = {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(0xFFA3485A))
-                    .padding(top = 20.dp)
-            ) {
-                ContentHomeScreen(navController)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(HomeBackground)
+            .padding(top = HomeTopPadding, start = 16.dp, end = 16.dp)
+    ) {
+        FeatureList(
+            items = features,
+            onClick = { feature ->
+                navController.navigate(feature.destination.routeWith())
             }
-        }
-        // Sin onTap: en Home no mostramos botón de atrás
-    )
+        )
+    }
 }
 
 @Composable
-fun ContentHomeScreen(navController: NavController) {
-
-    // Lista vertical
+private fun FeatureList(
+    items: List<Feature>,
+    onClick: (Feature) -> Unit
+) {
     LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(bottom = 96.dp)
+        verticalArrangement = Arrangement.spacedBy(ListItemSpacing),
+        contentPadding = PaddingValues(bottom = ListBottomPadding),
+        modifier = Modifier.fillMaxSize()
     ) {
-        items(activitiesMock.size) { index ->
-            val item = activitiesMock[index]
-            ActivityCardUi(activity = item) {
-                // Decide qué hacer con el click.
-                when (item.route) {
-                    "Texts" -> {
-                        val title = "Textos de Compose"
-                        val safe = Uri.encode(title)
-                        navController.navigate("detail-screen/$safe")
-                    }
-                    "Buttons" -> {
-                        val title = "Botones de Compose"
-                        val safe = Uri.encode(title)
-                        navController.navigate("detail-screen-button/$safe")
-                    }
-                    "Switch" -> {
-                        val title = "Switch de Compose"
-                        val safe = Uri.encode(title)
-                        navController.navigate("detail-screen-switch/$safe")
-                    }
-                }
-            }
+        items(items, key = { it.key }) { feature ->
+            ActivityCard(
+                title = feature.title,
+                subtitle = feature.subtitle,
+                icon = feature.icon,
+                onClick = { onClick(feature) }
+            )
         }
     }
 }
