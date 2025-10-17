@@ -40,8 +40,8 @@ object Graph {
     const val Home = "home"
 }
 
-object Route{
+class Routes{
 
-    data object texts  :  Destination("Texts", "detail-texts/Texts", "Textos de compose",)
+    val detailsTextRoute: String = "detail-text"
 
 }

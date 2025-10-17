@@ -24,9 +24,20 @@ data class Feature(
 val features: List<Feature> = listOf(
     Feature(destination =Destination(
         key = "Texts",
-        baseRoute = "detail-texts",
+        baseRoute = "detail-text",
         defaultTitle = "Textos de Compose"
-    ),   icon = Icons.Outlined.Message),
+    ),   icon = Icons.Outlined.Message,),
+    Feature(destination =Destination(
+        key = "Buttons",
+        baseRoute = "detail-buttons",
+        defaultTitle = "Botones de Compose"
+    ),   icon = Icons.Outlined.Message,),
+
+    Feature(destination =Destination(
+        key = "Switch",
+        baseRoute = "detail-switch",
+        defaultTitle = "Switch de Compose"
+    ),   icon = Icons.Outlined.Message,),
 //    Feature(destination = Destination.Buttons, icon = Icons.Outlined.AdsClick),
 //    Feature(destination = Destination.Switch,  icon = Icons.Outlined.ChangeCircle),
 //

@@ -29,26 +29,26 @@ fun NavGraph(
 
         composable(
             route = "detail-text/{title}",
-            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
+            arguments = listOf(navArgument("title") { type = NavType.StringType })
         ) { backStack ->
-            val title = backStack.arguments?.getString(TITLE_ARG) ?: Route.texts.defaultTitle
+            val title = backStack.arguments?.getString("title") ?: "Desconocido"
             TextsDetailScreen(title = title)
         }
 
-//        composable(
-//            route = Destination.Buttons.pattern(),
-//            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
-//        ) { backStack ->
-//            val title = backStack.arguments?.getString(TITLE_ARG) ?: Destination.Buttons.defaultTitle
-//            ButtonsDetailScreen(title = title)
-//        }
-//
-//        composable(
-//            route = Destination.Switch.pattern(),
-//            arguments = listOf(navArgument(TITLE_ARG) { type = NavType.StringType })
-//        ) { backStack ->
-//            val title = backStack.arguments?.getString(TITLE_ARG) ?: Destination.Switch.defaultTitle
-//            SwitchDetailScreen(title = title)
-//        }
+        composable(
+            route = "detail-buttons/{title}",
+            arguments = listOf(navArgument("title") { type = NavType.StringType })
+        ) { backStack ->
+            val title = backStack.arguments?.getString("title") ?: "Desconocido"
+            ButtonsDetailScreen(title = title)
+        }
+
+        composable(
+            route = "detail-switch/{title}",
+            arguments = listOf(navArgument("title") { type = NavType.StringType })
+        ) { backStack ->
+            val title = backStack.arguments?.getString("title") ?: "Desconocido"
+            SwitchDetailScreen(title = title)
+        }
     }
 }

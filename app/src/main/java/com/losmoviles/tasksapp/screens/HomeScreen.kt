@@ -29,9 +29,7 @@ fun HomeScreen(navController: NavController) {
     ) {
         FeatureList(
             items = features,
-            onClick = { feature ->
-                navController.navigate(feature.destination.routeWith())
-            }
+navController= navController
         )
     }
 }
@@ -39,7 +37,7 @@ fun HomeScreen(navController: NavController) {
 @Composable
 private fun FeatureList(
     items: List<Feature>,
-    onClick: (Feature) -> Unit
+    navController: NavController
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(ListItemSpacing),
@@ -51,7 +49,10 @@ private fun FeatureList(
                 title = feature.title,
                 subtitle = feature.subtitle,
                 icon = feature.icon,
-                onClick = { onClick(feature) }
+                onClick = {
+                    val title = feature.title
+                    navController.navigate(route="${feature.destination.baseRoute}/$title")
+                }
             )
         }
     }
